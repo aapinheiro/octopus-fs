@@ -1,0 +1,28 @@
+# --- Python -------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*.egg-info/
+*.egg
+build/
+dist/
+
+# --- Env / packaging (uv) -------------------------------------------------
+.venv/
+venv/
+
+# --- Test / coverage / type-check caches ----------------------------------
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.hypothesis/
+.coverage
+.coverage.*
+htmlcov/
+
+# --- Editors / OS ----------------------------------------------------------
+.DS_Store
+.vscode/
+.idea/
+
+# --- Project outputs --------------------------------------------------------
+reports/*.html

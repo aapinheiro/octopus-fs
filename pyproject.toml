@@ -1,11 +1,11 @@
 # ============================================================================
-# Octopus — packaging & tooling
+# octopus_fs — packaging & tooling
 # ----------------------------------------------------------------------------
 # Backend: hatchling (simple, PEP 621 native, builds sdist + wheel with `uv build`)
 # Recommended workflow (Mac Apple Silicon, Python 3.11):
 #   uv sync --all-extras        # create .venv + install dev deps
 #   uv run pytest               # tests
-#   uv build                    # dist/octopus-0.1.0-py3-none-any.whl
+#   uv build                    # dist/octopus_fs-0.1.0-py3-none-any.whl
 # ============================================================================
 
 [build-system]
@@ -13,10 +13,7 @@ requires = ["hatchling>=1.25"]
 build-backend = "hatchling.build"
 
 [project]
-# TODO(you): `octopus` is already taken on PyPI. Decide the DISTRIBUTION name
-# before the first publish (octofs / octoselect / tentacle-fs ...). The import
-# name below (src/octopus) can stay as is.
-name = "octopus"
+name = "octopus_fs"
 version = "0.1.0"
 description = "One API for eight feature selection techniques — at scale and in discovery."
 readme = "README.md"
@@ -26,7 +23,7 @@ authors = [{ name = "Alberto Pinheiro" }]
 keywords = ["feature-selection", "machine-learning", "mlops", "explainability"]
 
 # --- Core deps: keep this list SMALL. Everything heavy goes into extras. -----
-# Rationale: a production pipeline should be able to `pip install octopus` and
+# Rationale: a production pipeline should be able to `pip install octopus_fs` and
 # get the filter/embedded arms without pulling shap, matplotlib or jinja2.
 dependencies = [
   "numpy>=1.24",
@@ -42,10 +39,10 @@ trees = ["lightgbm>=4.0"]           # optional stronger default estimator
 # Discovery / HTML layer
 report = ["jinja2>=3.1", "plotly>=5.20"]
 # Everything a user might want
-all = ["octopus[shap,trees,report]"]
+all = ["octopus_fs[shap,trees,report]"]
 # Contributor toolchain
 dev = [
-  "octopus[all]",
+  "octopus_fs[all]",
   "pytest>=8.0",
   "pytest-cov>=5.0",
   "hypothesis>=6.100",   # property-based tests for rank aggregation
@@ -55,13 +52,13 @@ dev = [
 ]
 
 [project.scripts]
-octopus = "octopus.cli:main"
+octopus_fs = "octopus_fs.cli:main"
 
 [project.urls]
-Homepage = "https://github.com/<you>/octopus"
+Homepage = "https://github.com/<you>/octopus_fs"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/octopus"]
+packages = ["src/octopus_fs"]
 
 # --- Ruff: linter + formatter (replaces black/isort/flake8) ------------------
 [tool.ruff]
@@ -88,7 +85,7 @@ ignore_missing_imports = true      # shap/lightgbm ship partial stubs
 # --- Pytest -----------------------------------------------------------------
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-addopts = "-q --strict-markers --cov=octopus --cov-report=term-missing"
+addopts = "-q --strict-markers --cov=octopus_fs --cov-report=term-missing"
 markers = [
   "slow: arms that fit models (rfe, shap, permutation)",
   "optional: requires an optional extra to be installed",

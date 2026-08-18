@@ -1,4 +1,4 @@
-# 🐙 Octopus
+# 🐙 octopus_fs
 
 **One API. Eight arms. Eight feature selection techniques.**
 
@@ -37,7 +37,7 @@ does not apply.
 
 ```python
 # --- Discovery: explore and explain -------------------------------------
-from octopus import Octopus
+from octopus_fs import Octopus
 
 result = Octopus(arms="all", task="auto", random_state=42).fit(X, y)
 
@@ -48,7 +48,7 @@ result.to_html("reports/churn.html")   # dashboard: per-arm ranks, agreement, st
 ```python
 # --- Production: select and move on -------------------------------------
 from sklearn.pipeline import Pipeline
-from octopus.pipeline import OctopusSelector
+from octopus_fs.pipeline import OctopusSelector
 
 pipe = Pipeline([
     ("select", OctopusSelector(arms=["mutual_info", "lasso", "tree_importance"],
@@ -83,9 +83,9 @@ agree on, and the report says which is which.
 ## Install
 
 ```bash
-pip install octopus            # core: filters + embedded arms
-pip install "octopus[report]"  # + HTML dashboards
-pip install "octopus[all]"     # + shap, lightgbm
+pip install octopus_fs            # core: filters + embedded arms
+pip install "octopus_fs[report]"  # + HTML dashboards
+pip install "octopus_fs[all]"     # + shap, lightgbm
 ```
 
 ## Development
@@ -101,7 +101,7 @@ make build                # dist/*.whl
 ## Layout
 
 ```
-src/octopus/
+src/octopus_fs/
 ├── types.py         # ArmResult, SelectionResult, TaskType — the shared contract
 ├── config.py        # validated run configuration
 ├── core/            # base arm, registry, validation, orchestration
@@ -109,7 +109,7 @@ src/octopus/
 ├── consensus/       # rank aggregation + stability
 ├── pipeline/        # sklearn transformer + run manifest
 ├── report/          # HTML dashboard (Jinja2 + Plotly)
-└── cli.py           # octopus run --data ... --target ...
+└── cli.py           # octopus_fs run --data ... --target ...
 ```
 
 ## Roadmap
