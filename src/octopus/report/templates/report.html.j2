@@ -1,0 +1,49 @@
+{# Octopus report template — single self-contained file, no external assets. #}
+{# TODO(you): keep the CSS inline and minimal. Resist adding a framework:     #}
+{# a 12KB hand-written stylesheet is the difference between an email-able     #}
+{# artifact and a 4MB one.                                                    #}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>{{ title }}</title>
+  <style>
+    /* TODO(you): system font stack, max-width ~1100px, generous whitespace.
+       Print styles matter — people export these to PDF for review meetings. */
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🐙 {{ title }}</h1>
+    <p>{{ n_features }} features · {{ n_rows }} rows · task: {{ task }} ·
+       {{ arms_ok }}/{{ arms_total }} arms ran</p>
+  </header>
+
+  {# 1. Headline: what should I do with this? #}
+  <section id="summary">
+    {# TODO(you): 3-4 sentences generated from the data, not a chart:
+       'X features were ranked in the top-30 by at least 6 of 8 techniques.
+        Y features are strongly disagreed upon. Z arms were skipped.' #}
+  </section>
+
+  {# 2. Consensus #}
+  <section id="consensus">{{ consensus_table | safe }}</section>
+
+  {# 3. Figures #}
+  <section id="figures">
+    {% for fig in figures %}{{ fig | safe }}{% endfor %}
+  </section>
+
+  {# 4. Honesty section — never optional #}
+  <section id="skipped">
+    {% for arm, reason in skipped.items() %}
+      <p><strong>{{ arm }}</strong>: {{ reason }}</p>
+    {% endfor %}
+  </section>
+
+  <details id="manifest">
+    <summary>Run manifest</summary>
+    <pre>{{ manifest_json }}</pre>
+  </details>
+</body>
+</html>
