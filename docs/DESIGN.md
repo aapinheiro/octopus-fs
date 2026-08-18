@@ -31,10 +31,3 @@ this file is where you argue with yourself before writing code.
   resident data need a backend protocol. Defer to v0.4, but do not paint
   yourself into a corner: keep arms taking a DataFrame-like, not a
   `pandas.DataFrame` literal, in type hints.
-
-## Naming
-
-`octopus` is taken on PyPI (a WebAssembly security framework), and `octopus-ml`
-is taken too. Candidates for the distribution name, keeping the metaphor:
-`octofs`, `octoselect`, `tentacle`, `oktopus`. Verify on PyPI before the first
-publish; the import name can stay `octopus` either way.
